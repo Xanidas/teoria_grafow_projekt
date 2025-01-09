@@ -20,3 +20,16 @@ Algorytm DFS polega na przeszukiwaniu grafu w głąb. W każdym kroku wybierany 
 ## BFS (Breadth First Search)
 
 Algorytm BFS polega na przeszukiwaniu grafu wszerz. W każdym kroku odwiedzane są wszystkie wierzchołki sąsiednie, a następnie przechodzimy do odwiedzenia wierzchołków sąsiednich dla wierzchołków odwiedzonych w poprzednim kroku. Algorytm BFS jest implementowany za pomocą kolejki.
+
+## Instalacja
+
+Najpierw należy się upewnić, że mamy zainstalowanego Dockera. Następnie należy sklonować repozytorium i uruchomić poniższe komendy:
+
+```bash
+docker build -t fastapi-app .
+docker run -d -p 8000:8000 fastapi-app
+```
+
+Aplikcaja będzie dostępna pod adresem `http://127.0.0.1:8000/`.
+
+Dokumentacja API dostępna jest pod adresem `http://127.0.0.1:8000/docs`.

@@ -1,2 +1,6 @@
 pytest
 pytest-cov
+fastapi
+uvicorn
+requests
+pact-python
