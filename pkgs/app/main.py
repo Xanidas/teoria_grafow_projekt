@@ -13,13 +13,10 @@ graph = Graph()
 @app.post("/bfs/")
 def bfs(graph: Graph, start_node_label: str):
     """Perform a breadth-first search on the graph."""
-    start_node = graph.get_node(start_node_label)
-    if not start_node:
-        raise HTTPException(status_code=404, detail="Start node not found")
 
     bfs = BFS(graph)
     start_time = time()
-    result = {"bfs_result": bfs.bfs(start_node)}
+    result = {"bfs_result": bfs.bfs(start_node_label)}
     end_time = time()
     result["time"] = end_time - start_time
 
@@ -28,13 +25,10 @@ def bfs(graph: Graph, start_node_label: str):
 @app.post("/dfs/")
 def dfs(graph: Graph, start_node_label: str):
     """Perform a depth-first search on the graph."""
-    start_node = graph.get_node(start_node_label)
-    if not start_node:
-        raise HTTPException(status_code=404, detail="Start node not found")
 
     dfs = DFS(graph)
     start_time = time()
-    result = {"dfs_result": dfs.dfs(start_node)}
+    result = {"dfs_result": dfs.dfs(start_node_label)}
     end_time = time()
     result["time"] = end_time - start_time
 
