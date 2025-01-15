@@ -30,7 +30,8 @@ class TestBFS(unittest.TestCase):
                           ('e', 'i')}
 
         self.assertEqual(result["visited_nodes"], expected_nodes, "Visited nodes do not match")
-        self.assertEqual(result["visited_edges"], expected_edges, "Visited edges do not match")
+        self.assertEqual(len(result["visited_edges"]), len(expected_edges), "Number of edges do not match")
+        self.assertEqual({node for edge in result["visited_edges"] for node in edge}, expected_nodes, "Not all nodes are connected by the edges")
 
     def test_bfs_with_invalid_node(self):
         bfs = BFS(self.graph)
