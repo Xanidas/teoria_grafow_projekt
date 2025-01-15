@@ -1,0 +1,55 @@
+<main class="main">
+  <div class="container">
+    <h1>DFS vs BFS</h1>
+    <form (submit)="buildAndSendGraph($event)">
+      <div class="form-group">
+        <label for="nodes">Wierzchołki</label>
+        <input
+          type="text"
+          id="nodes"
+          [(ngModel)]="nodesInput"
+          name="nodes"
+          class="form-control"
+          placeholder="np. A, B, C"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="edges">Krawędzie</label>
+        <input
+          type="text"
+          id="edges"
+          [(ngModel)]="edgesInput"
+          name="edges"
+          class="form-control"
+          placeholder="np. A-B, B-C, C-A"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Dalej</button>
+    </form>
+
+    <!-- <div *ngIf="graphJson">
+      <h2>Generated Graph:</h2>
+      <pre>{{ graphJson | json }}</pre>
+    </div> -->
+
+    <!-- Display performance chart -->
+    <div
+      *ngIf="algorithmResults['bfs'] != null && algorithmResults['dfs'] != null"
+    >
+      <h3>Porównanie wydajności:</h3>
+      <div style="width: 100%; height: 300px">
+        <canvas
+          baseChart
+          [data]="chartData"
+          [options]="chartOptions"
+          [type]="'bar'"
+        >
+        </canvas>
+      </div>
+      <p><strong>Czas BFS:</strong> {{ algorithmResults["bfs"] }}s</p>
+      <p><strong>Czas DFS:</strong> {{ algorithmResults["dfs"] }}s</p>
+    </div>
+  </div>
+</main>
