@@ -1,25 +1,24 @@
-from pkgs.data.graph import Graph
+from backend.pkgs.data.graph import Graph
+
 
 class BFS:
     def __init__(self, graph: Graph):
         self.graph = graph
-        self.visited = []
+        self.visited = set()
         self.queue = []
-        self.visited_edges = []
+        self.visited_edges = set()
 
     def bfs(self, start_node):
         if start_node not in self.graph.nodes:
             raise ValueError("The start node is not in the graph")
 
-        self.visited = []
         self.queue = [start_node]
-        self.visited_edges = []
 
         while self.queue:
             current_node = self.queue.pop(0)
 
             if current_node not in self.visited:
-                self.visited.append(current_node)
+                self.visited.add(current_node)
 
                 for edge in self.graph.edges:
                     neighbor = None
@@ -30,7 +29,7 @@ class BFS:
 
                     if neighbor and neighbor not in self.queue:
                         self.queue.append(neighbor)
-                        self.visited_edges.append(edge)
+                        self.visited_edges.add(edge)
 
         return {
             "visited_nodes": self.visited,
