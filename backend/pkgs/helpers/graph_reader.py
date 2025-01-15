@@ -1,6 +1,6 @@
 import os
 
-from pkgs.data.graph import Graph
+from backend.pkgs.data.graph import Graph
 
 def read_lines(file_path):
     lines = []

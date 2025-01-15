@@ -1,4 +1,4 @@
-from pkgs.data.graph import Graph
+from backend.pkgs.data.graph import Graph
 
 class DFS:
     def __init__(self, graph: Graph):
