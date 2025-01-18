@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  enableThemeSwitch: true
+  enableThemeSwitch: true,
+  apiUrl: 'http://localhost:8000'
 };
