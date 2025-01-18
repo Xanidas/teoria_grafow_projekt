@@ -44,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-coverage-report
-          path: coverage.xml
+          path: backend/coverage.xml
 
   security_scan:
     name: Security Scan
