@@ -36,7 +36,8 @@ jobs:
           pip install -r backend/requirements.txt
       - name: Run Tests
         run: |
-          coverage run -m pytest backend/tests/
+          cd backend
+          coverage run -m pytest tests/
           coverage xml
 
       - name: Upload Test Coverage Artifacts
