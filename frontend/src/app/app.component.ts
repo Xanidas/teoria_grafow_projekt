@@ -1,10 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, Renderer2 } from '@angular/core';
+import { Component, Renderer2, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { environment } from '../environments/environment';
+import { firstValueFrom } from 'rxjs';
+
+interface AlgorithmResponse {
+  time: number;
+  dfs_result?: {
+    visited_nodes: string[];
+    visited_edges: [string, string][];
+  };
+  bfs_result?: {
+    visited_nodes: string[];
+    visited_edges: [string, string][];
+  };
+}
 
 @Component({
   selector: 'app-root',
@@ -19,6 +32,7 @@ export class AppComponent {
   graphJson: { [key: string]: string[] } | null = null;
   algorithmResults: { [key: string]: number } = {};
   enableThemeSwitch = environment.enableThemeSwitch;
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   chartData: ChartData<'bar'> = {
     labels: ['Czas wykonywania'],
@@ -55,13 +69,10 @@ export class AppComponent {
     Chart.register(...registerables);
   }
 
-  buildAndSendGraph(event: Event): void {
+  async buildAndSendGraph(event: Event): Promise<void> {
     event.preventDefault();
 
-    // Parse nodes
     const nodes = this.nodesInput.split(',').map((node) => node.trim());
-
-    // Parse edges
     const edges = this.edgesInput
       .split(',')
       .map((edge) => edge.trim().split('-'));
@@ -75,20 +86,47 @@ export class AppComponent {
     });
 
     this.graphJson = graph;
-    const mockResponse = {
-      bfs: 0.02,
-      dfs: 0.04,
+
+    const requestBody = {
+      nodes: nodes,
+      edges: edges.map(([from, to]) => [from, to]),
     };
 
-    // Simulate the API call response with the mock data
-    this.handleGraphResponse(mockResponse);
+    const startNode = nodes[0];
+
+    try {
+      const [bfsResponse, dfsResponse] = await Promise.all([
+        firstValueFrom(
+          this.http.post<AlgorithmResponse>(
+            `http://localhost:8000/bfs?start_node_label=${startNode}`,
+            requestBody
+          )
+        ),
+        firstValueFrom(
+          this.http.post<AlgorithmResponse>(
+            `http://localhost:8000/dfs?start_node_label=${startNode}`,
+            requestBody
+          )
+        ),
+      ]);
+
+      this.handleGraphResponse({
+        bfs: bfsResponse.time,
+        dfs: dfsResponse.time,
+      });
+
+    } catch (error) {
+      console.error('Error making API calls:', error);
+    }
   }
 
   handleGraphResponse(response: { bfs: number; dfs: number }): void {
-    console.log('Mock response:', response);
     this.algorithmResults = response;
-    // Update the chart with the response data (BFS and DFS times)
-    this.chartData.datasets[0].data = [response.bfs, response.dfs];
+    this.chartData.datasets[0].data = [response.bfs];
+    this.chartData.datasets[1].data = [response.dfs];
+    if (this.chart) {
+      this.chart.update();
+    }
   }
 
   toggleTheme(event: Event): void {
