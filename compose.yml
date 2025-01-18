@@ -1,7 +1,5 @@
 networks:
   tg:
-    name: tg
-    external: true
 services:
   tg-gui:
     build: 
@@ -13,7 +11,7 @@ services:
     networks:
       - tg
     environment:
-      - API_URL=/tg/apiiiiii/
+      - API_URL=http://localhost:12346
       - ENABLE_THEME_SWITCH=true
     ports:
       - 12345:8080

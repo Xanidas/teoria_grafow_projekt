@@ -1,6 +1,6 @@
 import unittest
-from backend.pkgs.data.graph import Graph
-from backend.pkgs.dfs.dfs import DFS
+from pkgs.data.graph import Graph
+from pkgs.dfs.dfs import DFS
 
 class TestDFS(unittest.TestCase):
 

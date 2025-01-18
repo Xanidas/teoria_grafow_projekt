@@ -31,7 +31,7 @@ export class AppComponent {
   edgesInput = '';
   graphJson: { [key: string]: string[] } | null = null;
   algorithmResults: { [key: string]: number } = {};
-  enableThemeSwitch = environment.enableThemeSwitch;
+  enableThemeSwitch = environment.enableThemeSwitch === "true";
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   chartData: ChartData<'bar'> = {
@@ -93,18 +93,18 @@ export class AppComponent {
     };
 
     const startNode = nodes[0];
-
+    console.log(environment);
     try {
       const [bfsResponse, dfsResponse] = await Promise.all([
         firstValueFrom(
           this.http.post<AlgorithmResponse>(
-            `http://localhost:8000/bfs?start_node_label=${startNode}`,
+            `${environment.apiUrl}/bfs?start_node_label=${startNode}`,
             requestBody
           )
         ),
         firstValueFrom(
           this.http.post<AlgorithmResponse>(
-            `http://localhost:8000/dfs?start_node_label=${startNode}`,
+            `${environment.apiUrl}/dfs?start_node_label=${startNode}`,
             requestBody
           )
         ),

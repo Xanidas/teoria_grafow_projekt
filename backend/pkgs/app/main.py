@@ -1,9 +1,9 @@
 from time import time
 
 from fastapi import FastAPI
-from backend.pkgs.data.graph import Graph
-from backend.pkgs.bfs.bfs import BFS
-from backend.pkgs.dfs.dfs import DFS
+from pkgs.data.graph import Graph
+from pkgs.bfs.bfs import BFS
+from pkgs.dfs.dfs import DFS
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
