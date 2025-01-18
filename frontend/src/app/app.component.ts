@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent {
   edgesInput = '';
   graphJson: { [key: string]: string[] } | null = null;
   algorithmResults: { [key: string]: number } = {};
+  enableThemeSwitch = environment.enableThemeSwitch;
 
   chartData: ChartData<'bar'> = {
     labels: ['Czas wykonywania'],
@@ -49,7 +51,7 @@ export class AppComponent {
     },
   };
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private renderer: Renderer2) {
     Chart.register(...registerables);
   }
 
@@ -87,5 +89,15 @@ export class AppComponent {
     this.algorithmResults = response;
     // Update the chart with the response data (BFS and DFS times)
     this.chartData.datasets[0].data = [response.bfs, response.dfs];
+  }
+
+  toggleTheme(event: Event): void {
+    const isChecked = (event.target as HTMLInputElement).checked;
+
+    if (isChecked) {
+      this.renderer.addClass(document.body, 'dark-mode');
+    } else {
+      this.renderer.removeClass(document.body, 'dark-mode');
+    }
   }
 }
