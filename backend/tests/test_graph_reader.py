@@ -1,7 +1,7 @@
 import unittest
 
-from pkgs.data.graph import Graph
-from pkgs.helpers.graph_reader import read_graph_from_txt_file, read_lines
+from backend.pkgs.data.graph import Graph
+from backend.pkgs.helpers.graph_reader import read_graph_from_txt_file, read_lines
 
 class TestGraphReader(unittest.TestCase):
     def test_graph_reader(self):
