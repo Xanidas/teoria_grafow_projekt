@@ -1,4 +1,4 @@
-from backend.pkgs.data.graph import Graph
+from pkgs.data.graph import Graph
 
 
 class BFS:

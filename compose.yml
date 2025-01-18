@@ -1,0 +1,28 @@
+networks:
+  tg:
+services:
+  tg-gui:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: tg-gui:1.0.0
+    container_name: tg-gui
+    restart: unless-stopped
+    networks:
+      - tg
+    environment:
+      - API_URL=http://localhost:12346
+      - ENABLE_THEME_SWITCH=true
+    ports:
+      - 12345:8080
+  tg-api:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    image: tg-api:1.0.0
+    container_name: tg-api
+    restart: unless-stopped
+    networks:
+      - tg
+    ports:
+      - 12346:8000

@@ -1,9 +1,11 @@
 [project]
 name = "bfs_dfs_search"
-version = "0.0.1"
+version = "1.0.0"
 description = "BFS and DFS search algorithms implementation"
 authors = [
     { name = "Jan Zawada", email = "jan.d.zawada@gmail.com" },
+    { name = "Szymon Samsel", email = "szymon.samsel@edu.uekat.pl" },
+    { name = "Wiktor Płużek", email = "wiktor.pluzek@edu.uekat.pl" }
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -17,7 +19,7 @@ requires-python = ">=3.12"
 text = """
 MIT License
 
-Copyright (c) 2025 Jan Zawada
+Copyright (c) 2025 Jan Zawada, Szymon Samsel, Wiktor Płużek
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

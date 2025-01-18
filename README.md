@@ -26,10 +26,9 @@ Algorytm BFS polega na przeszukiwaniu grafu wszerz. W każdym kroku odwiedzane s
 Najpierw należy się upewnić, że mamy zainstalowanego Dockera. Następnie należy sklonować repozytorium i uruchomić poniższe komendy:
 
 ```bash
-docker build -t fastapi-app .
-docker run -d -p 8000:8000 fastapi-app
+docker compose -f compose.yml up -d
 ```
 
-Aplikcaja będzie dostępna pod adresem `http://127.0.0.1:8000/`.
+Aplikcaja będzie dostępna pod adresem `http://127.0.0.1:12345/`.
 
-Dokumentacja API dostępna jest pod adresem `http://127.0.0.1:8000/docs`.
+Dokumentacja API dostępna jest pod adresem `http://127.0.0.1:12346/docs`.

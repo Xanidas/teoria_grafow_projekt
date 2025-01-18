@@ -1,5 +1,5 @@
 import unittest
-from backend.pkgs.data.graph import Graph
+from pkgs.data.graph import Graph
 
 class TestGraph(unittest.TestCase):
 

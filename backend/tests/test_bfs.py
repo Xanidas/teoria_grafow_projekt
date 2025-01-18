@@ -1,6 +1,6 @@
 import unittest
-from backend.pkgs.data.graph import Graph
-from backend.pkgs.bfs.bfs import BFS
+from pkgs.data.graph import Graph
+from pkgs.bfs.bfs import BFS
 
 class TestBFS(unittest.TestCase):
 
